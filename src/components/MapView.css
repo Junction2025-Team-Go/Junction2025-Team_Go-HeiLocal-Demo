@@ -1,0 +1,103 @@
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+}
+
+.map-loading,
+.map-error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.map-error {
+  color: #d32f2f;
+}
+
+.map-error p {
+  margin: 8px 0;
+}
+
+/* 현재 위치 버튼 (오른쪽 위) */
+.location-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.location-button .location-btn-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.location-button:hover {
+  transform: scale(1.05);
+}
+
+.location-button:active {
+  transform: scale(0.95);
+}
+
+/* 우하단 로고 */
+.map-logo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-logo img {
+  height: 32px;
+  width: auto;
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .location-button {
+    top: 12px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .location-button .location-btn-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .map-logo {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .map-logo img {
+    height: 24px;
+  }
+}

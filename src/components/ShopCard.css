@@ -1,0 +1,242 @@
+.shop-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 배경 이미지/비디오 */
+.shop-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* 그라데이션 오버레이 */
+.shop-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  z-index: 2;
+}
+
+/* 음소거 인디케이터 */
+.mute-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 11;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.mute-indicator svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* 상단 설명 */
+.shop-description {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.description-text {
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 12px 24px;
+  font-size: 24px;
+  font-weight: 700;
+  white-space: nowrap;
+  border-radius: 8px;
+}
+
+/* 하단 레스토랑 정보 */
+.shop-info {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  z-index: 10;
+  color: white;
+  max-width: calc(100% - 120px);
+}
+
+.shop-category {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.shop-name {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.shop-location {
+  font-size: 14px;
+  margin: 4px 0;
+  opacity: 0.9;
+}
+
+.shop-open-time {
+  font-size: 14px;
+  margin: 4px 0;
+  color: #FFB800;
+  font-weight: 600;
+}
+
+.shop-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.full-star {
+  color: #ffd700;
+}
+
+.half-star {
+  background: linear-gradient(90deg, #ffd700 50%, rgba(255, 215, 0, 0.3) 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.empty-star {
+  color: #ffd700;
+  opacity: 0.3;
+}
+
+.rating-count {
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+/* 우측 액션 버튼 */
+.shop-actions {
+  position: absolute;
+  bottom: 120px;
+  right: 16px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.action-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: transform 0.2s;
+  padding: 8px;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+}
+
+.action-button:active {
+  transform: scale(0.95);
+}
+
+.action-button.liked svg path {
+  animation: heartbeat 0.3s ease;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.action-count {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 모바일 */
+@media (max-width: 768px) {
+  .description-text {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+
+  .shop-info {
+    bottom: 40px;
+    left: 16px;
+    max-width: calc(100% - 100px);
+  }
+
+  .shop-name {
+    font-size: 24px;
+  }
+
+  .shop-category,
+  .shop-location,
+  .shop-open-time {
+    font-size: 13px;
+  }
+
+  .shop-rating {
+    font-size: 14px;
+  }
+
+  .shop-actions {
+    bottom: 100px;
+    right: 12px;
+    gap: 16px;
+  }
+
+  .action-button svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .action-count {
+    font-size: 12px;
+  }
+}
