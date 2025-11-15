@@ -9,8 +9,8 @@
   /* 유튜브 스타일: 흰색 배경, 직사각형 */
   background: #FFFFFF;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 8px 0;
-  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  padding: 6px 0;
+  padding-bottom: max(2px, env(safe-area-inset-bottom));
 
   display: flex;
   justify-content: space-around;

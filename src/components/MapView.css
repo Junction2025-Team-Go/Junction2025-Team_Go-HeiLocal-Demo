@@ -84,7 +84,8 @@
 @media (max-width: 768px) {
   .location-button {
     bottom: calc(80px + env(safe-area-inset-bottom)); /* 하단 탭바 위에 배치 */
-    right: 16px;
+    right: 16px; /* 우측 하단 */
+    top: auto;
     width: 56px; /* 40px * 1.4 */
     height: 56px; /* 40px * 1.4 */
   }
