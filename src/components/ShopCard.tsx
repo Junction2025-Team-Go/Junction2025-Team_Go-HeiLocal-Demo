@@ -16,9 +16,10 @@ interface ShopCardProps {
   isMuted: boolean
   onToggleMute: () => void
   onCommentClick?: (shopId: string) => void
+  onShopDetailClick?: (shopId: string) => void
 }
 
-export default function ShopCard({ shop, like, isActive, isMuted, onToggleMute, onCommentClick }: ShopCardProps) {
+export default function ShopCard({ shop, like, isActive, isMuted, onToggleMute, onCommentClick, onShopDetailClick }: ShopCardProps) {
   const [isLiked, setIsLiked] = useState(like?.isLiked || false)
   const [likeCount, setLikeCount] = useState(like?.likeCount || 0)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -125,7 +126,13 @@ export default function ShopCard({ shop, like, isActive, isMuted, onToggleMute, 
       <div className="shop-card-overlay" />
 
       {/* 하단 정보 */}
-      <div className="shop-info" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="shop-info"
+        onClick={(e) => {
+          e.stopPropagation()
+          onShopDetailClick?.(shop.shopId)
+        }}
+      >
         <div className="shop-category">{shop.shopType}</div>
         <h2 className="shop-name">{shop.shopName}</h2>
         <p className="shop-location">

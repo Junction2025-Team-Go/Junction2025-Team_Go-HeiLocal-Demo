@@ -22,11 +22,13 @@ interface MapViewProps {
   showModal: boolean
   isMyLocationActive: boolean
   onMyLocationToggle: () => void
+  isMobile?: boolean
 }
 
+// 에스푸 좌표 (데모용 하드코딩)
 const defaultCenter = {
-  lat: parseFloat(import.meta.env.VITE_DEFAULT_LAT || '60.1699'),
-  lng: parseFloat(import.meta.env.VITE_DEFAULT_LNG || '24.9384')
+  lat: 60.1567259,
+  lng: 24.6300172
 }
 
 // PNG 마커 사용 (SVG는 백업용으로 주석 처리)
@@ -43,7 +45,7 @@ const defaultCenter = {
 //   return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg)
 // }
 
-export default function MapView({ locations, selectedLocation, onLocationSelect, showModal, isMyLocationActive, onMyLocationToggle }: MapViewProps) {
+export default function MapView({ locations, selectedLocation, onLocationSelect, showModal, isMyLocationActive, onMyLocationToggle, isMobile = false }: MapViewProps) {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null)
   const [map, setMap] = useState<google.maps.Map | null>(null)
 
@@ -52,8 +54,14 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ''
   })
 
-  // 현재 위치 감지
+  // 현재 위치 - 데모용 하드코딩 (에스푸)
   useEffect(() => {
+    // 데모 위치 고정
+    setUserLocation(defaultCenter)
+    console.log('✅ 현재 위치 (데모):', defaultCenter)
+
+    // TODO: 실제 API 연동 시 아래 코드 활성화
+    /*
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -73,6 +81,7 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
       console.warn('⚠️ GPS 미지원')
       setUserLocation(defaultCenter)
     }
+    */
   }, [])
 
   // 지도 중심 계산 (selectedLocation 제거 - 모달만 표시)
@@ -127,13 +136,13 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
     }
   }
 
-  // 선택된 위치가 변경될 때 지도 이동 (모달 옆에 핀이 보이도록)
+  // 선택된 위치가 변경될 때 지도 이동
   useEffect(() => {
     if (selectedLocation && map) {
-      // 헬싱키 근처, 줌 15에서 화면 너비의 약 22%에 해당하는 경도 차이
-      const lngOffset = 0.012
+      // 모바일: 정중앙 (모달이 화면 중앙 오버레이)
+      // 데스크톱: offset 적용 (모달이 오른쪽)
+      const lngOffset = isMobile ? 0 : 0.012
 
-      // 마커 위치에서 오른쪽으로 offset만큼 이동한 지점을 중심으로
       const newCenter = {
         lat: selectedLocation.lat,
         lng: selectedLocation.lng + lngOffset
@@ -141,11 +150,12 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
 
       // 부드러운 애니메이션으로 이동
       const currentZoom = map.getZoom() || 13
+      const targetZoom = isMobile ? 16 : 15 // 모바일에서 더 가까이
 
       // 줌이 다르면 먼저 줌 조정
-      if (currentZoom !== 15) {
+      if (currentZoom !== targetZoom) {
         // 부드럽게 줌 변경
-        map.setZoom(15)
+        map.setZoom(targetZoom)
         // 줌 애니메이션 후 이동
         setTimeout(() => {
           if (map) {
@@ -157,7 +167,7 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
         map.panTo(newCenter)
       }
     }
-  }, [selectedLocation, map])
+  }, [selectedLocation, map, isMobile])
 
   if (loadError) {
     return (
@@ -266,6 +276,7 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
         <LocationDetail
           location={selectedLocation}
           onClose={() => onLocationSelect(null)}
+          isMobile={isMobile}
         />
       )}
     </div>

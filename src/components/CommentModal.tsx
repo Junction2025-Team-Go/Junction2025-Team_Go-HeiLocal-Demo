@@ -21,8 +21,10 @@ export default function CommentModal({ shopId, shopName, onClose }: CommentModal
       <div className="comment-modal" onClick={(e) => e.stopPropagation()}>
         {/* 헤더 */}
         <div className="comment-modal-header">
-          <h3>Comments</h3>
-          <span className="comment-count">{totalCount}</span>
+          <div>
+            <h3>{shopName}</h3>
+            <span className="comment-count">{totalCount} comments</span>
+          </div>
           <button className="comment-close-button" onClick={onClose}>
             ✕
           </button>

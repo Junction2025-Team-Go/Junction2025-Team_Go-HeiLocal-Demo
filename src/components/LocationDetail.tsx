@@ -9,9 +9,10 @@ import './LocationDetail.css'
 interface LocationDetailProps {
   location: Location
   onClose: () => void
+  isMobile?: boolean
 }
 
-export default function LocationDetail({ location, onClose }: LocationDetailProps) {
+export default function LocationDetail({ location, onClose, isMobile = false }: LocationDetailProps) {
   // 0.5 단위로 내림 (4.6 → 4.5, 4.4 → 4.0)
   const roundedRating = Math.floor(location.rating * 2) / 2
 
@@ -33,16 +34,20 @@ export default function LocationDetail({ location, onClose }: LocationDetailProp
   }
 
   return (
-    <div className="location-detail-card">
-      {/* 썸네일 이미지 */}
-      <div className="detail-image-container">
-        {location.imageUrl && (
-          <img src={location.imageUrl} alt={location.name} className="detail-image" />
-        )}
-        <button className="close-button" onClick={onClose}>
-          ✕
-        </button>
-      </div>
+    <>
+      {/* 모바일에서는 오버레이 배경 추가 */}
+      {isMobile && <div className="location-detail-overlay" onClick={onClose} />}
+
+      <div className={`location-detail-card ${isMobile ? 'mobile-centered' : ''}`}>
+        {/* 썸네일 이미지 */}
+        <div className="detail-image-container">
+          {location.imageUrl && (
+            <img src={location.imageUrl} alt={location.name} className="detail-image" />
+          )}
+          <button className="close-button" onClick={onClose}>
+            ✕
+          </button>
+        </div>
 
         {/* 상세 정보 */}
         <div className="detail-content">
@@ -71,9 +76,18 @@ export default function LocationDetail({ location, onClose }: LocationDetailProp
 
         {/* 액션 버튼들 */}
         <div className="detail-actions">
-          <button className="go-button">GO!</button>
+          <button
+            className="go-button"
+            onClick={() => {
+              const url = `https://www.google.com/maps/dir/?api=1&destination=${location.lat},${location.lng}`
+              window.open(url, '_blank')
+            }}
+          >
+            GO!
+          </button>
         </div>
       </div>
     </div>
+    </>
   )
 }

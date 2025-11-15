@@ -60,6 +60,14 @@
   height: 32px;
 }
 
+/* 데스크톱 전용 스타일 */
+@media (min-width: 769px) {
+  .mute-indicator {
+    top: 20px;
+    right: 20px;
+  }
+}
+
 /* 상단 설명 */
 .shop-description {
   position: absolute;
@@ -87,6 +95,12 @@
   z-index: 10;
   color: white;
   max-width: calc(100% - 120px);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.shop-info:active {
+  transform: scale(0.98);
 }
 
 .shop-category {
@@ -200,13 +214,23 @@
 
 /* 모바일 */
 @media (max-width: 768px) {
+  /* 비디오 전체를 위로 올림 */
+  .shop-card-bg {
+    transform: translateY(-40px);
+  }
+
+  .shop-card-overlay {
+    transform: translateY(-40px);
+  }
+
   .description-text {
     font-size: 20px;
     padding: 10px 20px;
   }
 
+  /* 가게 정보 - 탭바 바로 위 */
   .shop-info {
-    bottom: 40px;
+    bottom: 90px; /* 탭바(24px) + 여유(66px) */
     left: 16px;
     max-width: calc(100% - 100px);
   }
@@ -225,8 +249,9 @@
     font-size: 14px;
   }
 
+  /* 우측 액션 버튼 - 가게 정보보다 위 */
   .shop-actions {
-    bottom: 100px;
+    bottom: 160px; /* 가게 정보 위 */
     right: 12px;
     gap: 16px;
   }
@@ -238,5 +263,24 @@
 
   .action-count {
     font-size: 12px;
+  }
+
+  /* 음소거 버튼 - 오른쪽 상단 */
+  .mute-indicator {
+    position: absolute;
+    top: 100px; /* 헤더 아래, 비디오 위로 올라간 만큼 보정 */
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    z-index: 11;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: auto; /* 클릭 가능하게 */
+  }
+
+  .mute-indicator svg {
+    width: 24px;
+    height: 24px;
   }
 }

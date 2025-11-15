@@ -17,9 +17,11 @@ interface ShortsFeedProps {
   selectedShopId?: string | null
   onShopChange?: (shopId: string) => void
   onCommentClick?: (shopId: string) => void
+  onShopDetailClick?: (shopId: string) => void
+  isVisible?: boolean // 모바일에서 뷰 전환 시 비디오 정지용
 }
 
-export default function ShortsFeed({ shops, shopLikes, userLocation, selectedShopId, onShopChange, onCommentClick }: ShortsFeedProps) {
+export default function ShortsFeed({ shops, shopLikes, userLocation, selectedShopId, onShopChange, onCommentClick, onShopDetailClick, isVisible = true }: ShortsFeedProps) {
   const [currentIndex, setCurrentIndex] = useState(1)
   const [sortedShops, setSortedShops] = useState<Shop[]>(shops)
   const [isTransitioning, setIsTransitioning] = useState(true)
@@ -319,7 +321,7 @@ export default function ShortsFeed({ shops, shopLikes, userLocation, selectedSho
       >
         {extendedShops.map((shop, index) => {
           const like = shopLikes.find(l => l.shopId === shop.shopId)
-          const isActive = index === currentIndex
+          const isActive = isVisible && index === currentIndex // 뷰가 보일 때만 활성화
           return (
             <div key={`${shop.shopId}-${index}`} className="shorts-item">
               <ShopCard
@@ -331,6 +333,7 @@ export default function ShortsFeed({ shops, shopLikes, userLocation, selectedSho
                 isMuted={isMuted}
                 onToggleMute={() => setIsMuted(!isMuted)}
                 onCommentClick={onCommentClick}
+                onShopDetailClick={onShopDetailClick}
               />
             </div>
           )
