@@ -230,7 +230,7 @@
 
   /* 가게 정보 - 탭바 바로 위 */
   .shop-info {
-    bottom: 90px; /* 탭바(24px) + 여유(66px) */
+    bottom: 110px; /* 탭바 위로 더 올림 */
     left: 16px;
     max-width: calc(100% - 100px);
   }
