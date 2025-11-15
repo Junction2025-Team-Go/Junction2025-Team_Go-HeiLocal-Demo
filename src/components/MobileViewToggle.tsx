@@ -17,8 +17,8 @@ export default function MobileViewToggle({ activeView, onToggle }: MobileViewTog
         className={`toggle-button ${activeView === 'video' ? 'active' : ''}`}
         onClick={() => onToggle('video')}
       >
-        <svg className="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="12" cy="12" r="10" strokeWidth="2" />
+        <svg className="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <circle cx="12" cy="12" r="10" />
           <polygon points="10 8 16 12 10 16" fill="currentColor" />
         </svg>
         <span>Video</span>
@@ -27,10 +27,9 @@ export default function MobileViewToggle({ activeView, onToggle }: MobileViewTog
         className={`toggle-button ${activeView === 'map' ? 'active' : ''}`}
         onClick={() => onToggle('map')}
       >
-        <svg className="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M8 2v16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M16 6v16" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg className="toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
         </svg>
         <span>Map</span>
       </button>

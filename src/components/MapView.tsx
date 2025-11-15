@@ -202,7 +202,10 @@ export default function MapView({ locations, selectedLocation, onLocationSelect,
           mapTypeControl: false,
           fullscreenControl: false,
           clickableIcons: false,
-          draggable: !isMyLocationActive, // 내 위치 활성화 시 드래그 비활성화
+          // 모바일에서 한 손가락으로 지도 조작 가능하도록 설정
+          gestureHandling: isMobile ? 'greedy' : 'auto',
+          // 모바일에서는 항상 드래그 가능, 데스크톱에서는 내 위치 활성화 시 비활성화
+          draggable: isMobile ? true : !isMyLocationActive,
           scrollwheel: !isMyLocationActive, // 내 위치 활성화 시 줌 비활성화
           disableDoubleClickZoom: isMyLocationActive
         }}
