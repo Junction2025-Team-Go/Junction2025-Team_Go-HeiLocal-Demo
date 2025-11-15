@@ -1,16 +1,16 @@
 .filter-bar {
   display: flex;
-  gap: 8px;
+  gap: 9.6px; /* 8px * 1.2 */
   align-items: center;
-  padding: 8px 16px;
+  padding: 9.6px 19.2px; /* 8px 16px * 1.2 */
 }
 
 .filter-button {
-  padding: 8px 16px;
+  padding: 9.6px 19.2px; /* 8px 16px * 1.2 */
   background: var(--white);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 14px;
+  border-radius: 24px; /* 20px * 1.2 */
+  font-size: 16.8px; /* 14px * 1.2 */
   font-weight: 500;
   color: var(--text-dark);
   white-space: nowrap;
@@ -37,8 +37,8 @@
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 6px 12px;
-    border-radius: 20px;
+    padding: 8.4px 16.8px; /* 6px 12px * 1.4 */
+    border-radius: 28px; /* 20px * 1.4 */
   }
 
   .filter-bar::-webkit-scrollbar {
@@ -46,7 +46,8 @@
   }
 
   .filter-button {
-    font-size: 13px;
-    padding: 6px 12px;
+    font-size: 18.2px; /* 13px * 1.4 */
+    padding: 8.4px 16.8px; /* 6px 12px * 1.4 */
+    border-radius: 28px; /* 20px * 1.4 */
   }
 }
